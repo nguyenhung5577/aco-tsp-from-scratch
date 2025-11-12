@@ -677,7 +677,8 @@ class TSPVisualizer(QMainWindow):
     def _plot_compare_history(self) -> None:
         if not hasattr(self, "canvas_compare_history"):
             return
-        ax = self.canvas_compare_history.axes
+        canvas = self.canvas_compare_history
+        ax = canvas.axes
         ax.clear()
         has_data = False
         for algo, history in self.algorithm_history.items():
@@ -692,7 +693,8 @@ class TSPVisualizer(QMainWindow):
             ax.grid(True, alpha=0.3)
         else:
             ax.set_title("Chưa có dữ liệu so sánh.")
-        self.canvas_compare_history.draw()
+        canvas.fig.subplots_adjust(left=0.12, right=0.98, top=0.9, bottom=0.18)
+        canvas.draw()
 
     def _show_error(self, message: str) -> None:
         QMessageBox.critical(self, "Lỗi", message)
